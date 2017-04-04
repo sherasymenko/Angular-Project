@@ -1,0 +1,42 @@
+<div *ngIf="!addMode" class='panel panel-primary'>
+  <div class='panel-heading'>
+    <div class=" col-md-6">
+      <div> Lista pracowników</div>
+    </div>
+    <div align="right"><a class='btn btn-default btn-danger' (click)="addPerson()">Nowy pracownik</a></div>
+  </div>
+  <table class='table'>
+    <div class=" col-md-12" *ngFor="let person of persons">
+      <div class=" col-md-1">
+      </div>
+      <div class="person-cell  col-md-10">
+        <div class="person-cell  col-md-3">
+          <div class="row">
+            <div>
+              <img
+                [src]='person.imageUrl'
+                onError="this.src='https://www.trenerland.pl/media/controller/uzytkownicy/trenerzy/avatar-m.gif'"
+                [style.width.px]='imageWidth'
+              >
+            </div>
+          </div>
+        </div>
+        <div class="person-cell  col-md-5">
+          <div class="row">
+            <div>
+              <div>{{person.fName}} {{person.lName}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <div>Stanowisko: {{person.jobTitle}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </table>
+</div>
+
+<add-person *ngIf="addMode" (saveNewPerson)="saveNewPerson($event)" (cancelNewPerson)="cancelNewPerson()"></add-person>

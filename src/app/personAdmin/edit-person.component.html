@@ -1,0 +1,58 @@
+<div class="col-md-12">
+  <h3>Wypełnij formularz</h3>
+</div>
+<div class="col-md-6" *ngIf='person'>
+  <form (ngSubmit)="savePerson(addForm.value)" [formGroup]="profileForm" #addForm="ngForm" autocomplete="off">
+    <div class="form-group">
+      <label for="fName">Imię:</label>
+      <em *ngIf="profileForm.controls.fName?.invalid">pole jest wymagane</em>
+      <input formControlName="fName" id="fName" name="fName" type="text" class="form-control" value="{{person.fName}}"
+             placeholder="imię..."/>
+    </div>
+    <div class="form-group">
+      <label for="lName">Nazwisko:</label>
+      <em *ngIf="profileForm.controls.lName?.invalid">pole jest wymagane</em>
+      <input formControlName="lName" id="lName" name="lName" type="text" class="form-control"  value="{{person.lName}}"
+             placeholder="nazwisko..."/>
+    </div>
+    <div class="form-group">
+      <label for="age">Wiek:</label>
+      <em *ngIf="profileForm.controls.age?.invalid">niepoprawna wartość</em>
+      <input formControlName="age" id="age" name="age" type="text" class="form-control" placeholder="wiek..."  value="{{person.age}}"/>
+    </div>
+    <div class="form-group">
+      <label for="jobTitle">Stanowisko:</label>
+      <input formControlName="jobTitle" id="jobTitle" name="jobTitle" type="text" class="form-control"
+             placeholder="stanowisko..."  value="{{person.jobTitle}}"/>
+    </div>
+    <div class="form-group">
+      <label for="gender">Płeć:</label>
+      <select class="form-control" id="gender" name="gender" formControlName="gender"  value="{{person.gender}}">
+        <option value="">select...</option>
+        <option value="W">Kobieta</option>
+        <option value="M">Mężczyzna</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="startDate">Data rozpoczęcia:</label>
+      <input id="startDate" name="startDate" type="date" class="form-control" formControlName="startDate"  value="{{person.startDate}}"/>
+    </div>
+    <div class="form-group">
+      <label for="email">E-mail:</label>
+      <input id="email" formControlName="email" name="email" type="text" class="form-control" placeholder="e-mail..."/>
+    </div>
+    <div class="form-group">
+      <label for="personNo">PESEL:</label>
+      <em *ngIf="profileForm.controls.personNo?.invalid">pole jest wymagane</em>
+      <input formControlName="personNo" id="personNo" name="personNo" type="text" class="form-control"  value="{{person.personNo}}"
+             placeholder="pesel..."/>
+    </div>
+    <div class="form-group">
+      <label for="imageUrl">Obraz:</label>
+      <input id="imageUrl" formControlName="imageUrl" name="imageUrl" type="text" class="form-control"  value="{{person.imageUrl}}"
+             placeholder="url do obrazka..."/>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+  </form>
+</div>

@@ -1,0 +1,72 @@
+<div *ngIf="!addMode" class='panel panel-primary'>
+  <div class='panel-heading'>
+    <div class="row">
+      <div class="col-md-4">
+        <div>Lista pracowników</div>
+      </div>
+      <div class="col-md-3">
+        <div>Filtruj według:</div>
+      </div>
+      <div class="col-md-3">
+        <input type='text' [(ngModel)]='listFilter' size="10" style="color: black"/>
+      </div>
+      <div class="col-md-2"><a class='btn btn-default btn-danger' (click)="addPerson()">Nowy pracownik</a></div>
+    </div>
+  </div>
+  <table class='table' align="center">
+    <div class="col-md-12" *ngFor="let person of persons | personFilter:listFilter">
+      <div class=" col-md-1">
+      </div>
+      <div class="person-cell-for-admin  col-md-10">
+
+        <div class="person-cell  col-md-3">
+          <div class="row">
+            <div>
+              <img
+                [src]='person.imageUrl'
+                onError="this.src='https://www.trenerland.pl/media/controller/uzytkownicy/trenerzy/avatar-m.gif'"
+                [style.width.px]='imageWidth'
+              >
+            </div>
+          </div>
+        </div>
+        <div class="person-cell-for-admin  col-md-6">
+          <div class="row">
+            <div>
+              <div>{{person.fName}} {{person.lName}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <div>Pesel: {{person.personNo}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <div>Stanowisko: {{person.jobTitle}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <div>Data zatrudnienia: {{person.startDate | date:'d/M/y'}}</div>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <div>E-mail: {{person.email}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="person-cell" align="right" style="margin: 20px">
+          <div class="row">
+            <div>
+              <a class='btn btn-primary' [routerLink]="['/personsAdmin/person', person.personId]"
+                 (updatePerson)="updatePerson($event)">Edytuj</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </table>
+</div>
+<add-person *ngIf="addMode" (saveNewPerson)="saveNewPerson($event)" (cancelNewPerson)="cancelNewPerson()"></add-person>
